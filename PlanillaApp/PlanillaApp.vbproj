@@ -123,6 +123,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionDb\ConnPlanillaDb.vb" />
+    <Compile Include="FrmBonos.Designer.vb">
+      <DependentUpon>FrmBonos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBonos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmCargos.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -150,12 +156,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Repositories\BonosRepository.vb" />
     <Compile Include="Repositories\CargoRepository.vb" />
     <Compile Include="Repositories\TrabajadorRepository.vb" />
+    <Compile Include="Services\BonosService.vb" />
     <Compile Include="Services\CargoService.vb" />
     <Compile Include="Services\TrabajadorService.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmBonos.resx">
+      <DependentUpon>FrmBonos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmCargos.resx">
       <DependentUpon>FrmCargos.vb</DependentUpon>
     </EmbeddedResource>

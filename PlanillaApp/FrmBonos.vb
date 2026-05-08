@@ -8,4 +8,9 @@
     Function CargarBonos()
         DgvBonos.DataSource = bonoService.ObtenerBonos()
     End Function
+
+    Private Sub BtnIrAsignacion_Click(sender As Object, e As EventArgs) Handles BtnIrAsignacion.Click
+        Me.Hide()
+        AsignacionDeBonosACargos.Show()
+    End Sub
 End Class

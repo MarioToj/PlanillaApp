@@ -29,13 +29,14 @@ Partial Class FrmCargos
         Me.BtnGuardar = New System.Windows.Forms.Button()
         Me.DgvCargos = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.LblTitleCargo = New System.Windows.Forms.Label()
         CType(Me.DgvCargos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TxtNombreCargo
         '
         Me.TxtNombreCargo.Location = New System.Drawing.Point(133, 129)
-        Me.TxtNombreCargo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtNombreCargo.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtNombreCargo.Name = "TxtNombreCargo"
         Me.TxtNombreCargo.Size = New System.Drawing.Size(124, 20)
         Me.TxtNombreCargo.TabIndex = 0
@@ -63,7 +64,7 @@ Partial Class FrmCargos
         'TxtSueldoBase
         '
         Me.TxtSueldoBase.Location = New System.Drawing.Point(297, 129)
-        Me.TxtSueldoBase.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TxtSueldoBase.Margin = New System.Windows.Forms.Padding(2)
         Me.TxtSueldoBase.Name = "TxtSueldoBase"
         Me.TxtSueldoBase.Size = New System.Drawing.Size(124, 20)
         Me.TxtSueldoBase.TabIndex = 2
@@ -71,7 +72,7 @@ Partial Class FrmCargos
         'BtnGuardar
         '
         Me.BtnGuardar.Location = New System.Drawing.Point(226, 157)
-        Me.BtnGuardar.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.BtnGuardar.Margin = New System.Windows.Forms.Padding(2)
         Me.BtnGuardar.Name = "BtnGuardar"
         Me.BtnGuardar.Size = New System.Drawing.Size(101, 25)
         Me.BtnGuardar.TabIndex = 4
@@ -82,7 +83,7 @@ Partial Class FrmCargos
         '
         Me.DgvCargos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvCargos.Location = New System.Drawing.Point(89, 187)
-        Me.DgvCargos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.DgvCargos.Margin = New System.Windows.Forms.Padding(2)
         Me.DgvCargos.Name = "DgvCargos"
         Me.DgvCargos.RowHeadersWidth = 62
         Me.DgvCargos.RowTemplate.Height = 28
@@ -98,11 +99,22 @@ Partial Class FrmCargos
         Me.Button1.Text = "Ir a Bonos"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'LblTitleCargo
+        '
+        Me.LblTitleCargo.AutoSize = True
+        Me.LblTitleCargo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblTitleCargo.Location = New System.Drawing.Point(129, 53)
+        Me.LblTitleCargo.Name = "LblTitleCargo"
+        Me.LblTitleCargo.Size = New System.Drawing.Size(313, 24)
+        Me.LblTitleCargo.TabIndex = 7
+        Me.LblTitleCargo.Text = "Creacion de Cargos y Sueldos Base"
+        '
         'FrmCargos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(565, 400)
+        Me.Controls.Add(Me.LblTitleCargo)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.DgvCargos)
         Me.Controls.Add(Me.BtnGuardar)
@@ -110,7 +122,7 @@ Partial Class FrmCargos
         Me.Controls.Add(Me.TxtSueldoBase)
         Me.Controls.Add(Me.LblNombreCargo)
         Me.Controls.Add(Me.TxtNombreCargo)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "FrmCargos"
         Me.Text = "Cargos"
         CType(Me.DgvCargos, System.ComponentModel.ISupportInitialize).EndInit()
@@ -126,4 +138,5 @@ Partial Class FrmCargos
     Friend WithEvents BtnGuardar As Button
     Friend WithEvents DgvCargos As DataGridView
     Friend WithEvents Button1 As Button
+    Friend WithEvents LblTitleCargo As Label
 End Class

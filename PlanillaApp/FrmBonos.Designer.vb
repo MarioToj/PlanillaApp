@@ -28,6 +28,8 @@ Partial Class FrmBonos
         Me.TxtMontoBono = New System.Windows.Forms.TextBox()
         Me.LblNombreBono = New System.Windows.Forms.Label()
         Me.TxtNombreBono = New System.Windows.Forms.TextBox()
+        Me.LblTitleBonos = New System.Windows.Forms.Label()
+        Me.BtnIrAsignacion = New System.Windows.Forms.Button()
         CType(Me.DgvBonos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -88,11 +90,32 @@ Partial Class FrmBonos
         Me.TxtNombreBono.Size = New System.Drawing.Size(124, 20)
         Me.TxtNombreBono.TabIndex = 6
         '
+        'LblTitleBonos
+        '
+        Me.LblTitleBonos.AutoSize = True
+        Me.LblTitleBonos.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblTitleBonos.Location = New System.Drawing.Point(261, 75)
+        Me.LblTitleBonos.Name = "LblTitleBonos"
+        Me.LblTitleBonos.Size = New System.Drawing.Size(279, 24)
+        Me.LblTitleBonos.TabIndex = 12
+        Me.LblTitleBonos.Text = "Creacion de Bonos para Cargos"
+        '
+        'BtnIrAsignacion
+        '
+        Me.BtnIrAsignacion.Location = New System.Drawing.Point(336, 328)
+        Me.BtnIrAsignacion.Name = "BtnIrAsignacion"
+        Me.BtnIrAsignacion.Size = New System.Drawing.Size(143, 23)
+        Me.BtnIrAsignacion.TabIndex = 13
+        Me.BtnIrAsignacion.Text = "ir a la asignacion"
+        Me.BtnIrAsignacion.UseVisualStyleBackColor = True
+        '
         'FrmBonos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.BtnIrAsignacion)
+        Me.Controls.Add(Me.LblTitleBonos)
         Me.Controls.Add(Me.DgvBonos)
         Me.Controls.Add(Me.BtnGuardar)
         Me.Controls.Add(Me.LblMontoBono)
@@ -113,4 +136,6 @@ Partial Class FrmBonos
     Friend WithEvents TxtMontoBono As TextBox
     Friend WithEvents LblNombreBono As Label
     Friend WithEvents TxtNombreBono As TextBox
+    Friend WithEvents LblTitleBonos As Label
+    Friend WithEvents BtnIrAsignacion As Button
 End Class

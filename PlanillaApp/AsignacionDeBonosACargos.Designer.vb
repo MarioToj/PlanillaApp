@@ -28,6 +28,7 @@ Partial Class AsignacionDeBonosACargos
         Me.BtnAsignarBono = New System.Windows.Forms.Button()
         Me.LblCargo = New System.Windows.Forms.Label()
         Me.LblBono = New System.Windows.Forms.Label()
+        Me.BtnAsignarCargos = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CbObtenerCargos
@@ -85,11 +86,21 @@ Partial Class AsignacionDeBonosACargos
         Me.LblBono.TabIndex = 5
         Me.LblBono.Text = "Bono"
         '
+        'BtnAsignarCargos
+        '
+        Me.BtnAsignarCargos.Location = New System.Drawing.Point(341, 370)
+        Me.BtnAsignarCargos.Name = "BtnAsignarCargos"
+        Me.BtnAsignarCargos.Size = New System.Drawing.Size(169, 23)
+        Me.BtnAsignarCargos.TabIndex = 6
+        Me.BtnAsignarCargos.Text = "Ir a asignacion de cargos"
+        Me.BtnAsignarCargos.UseVisualStyleBackColor = True
+        '
         'AsignacionDeBonosACargos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.BtnAsignarCargos)
         Me.Controls.Add(Me.LblBono)
         Me.Controls.Add(Me.LblCargo)
         Me.Controls.Add(Me.BtnAsignarBono)
@@ -109,4 +120,5 @@ Partial Class AsignacionDeBonosACargos
     Friend WithEvents BtnAsignarBono As Button
     Friend WithEvents LblCargo As Label
     Friend WithEvents LblBono As Label
+    Friend WithEvents BtnAsignarCargos As Button
 End Class

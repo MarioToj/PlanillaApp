@@ -21,6 +21,24 @@ Public Class CargoRepository
         Return Lista
     End Function
 
+    Function GetById(id As Integer) As Cargo
+        Using conn = dbConn.GetConnection()
+            conn.Open()
+            Dim Cmd As New MySqlCommand("SELECT * from cargos WHERE IDCargo = @id", conn)
+            Cmd.Parameters.AddWithValue("@id", id)
+            Using rd = Cmd.ExecuteReader()
+                If rd.Read() Then
+                    Return New Cargo With {
+                        .IDCargo = rd.GetInt32("IDCargo"),
+                        .NombreCargo = rd.GetString("NombreCargo"),
+                        .SueldoBase = rd.GetDecimal("SueldoBase")
+                    }
+                End If
+            End Using
+        End Using
+        Return Nothing
+    End Function
+
     Public Sub AddCargo(c As Cargo)
         Using conn = dbConn.GetConnection()
             conn.Open()

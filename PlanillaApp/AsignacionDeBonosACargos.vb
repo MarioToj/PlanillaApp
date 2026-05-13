@@ -28,4 +28,9 @@
     Function ObtenerCargos() As List(Of Cargo)
         Return cargoService.ObtenerCargos()
     End Function
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnAsignarCargos.Click
+        Me.Hide()
+        FrmAsignarCargoATrabajador.Show()
+    End Sub
 End Class

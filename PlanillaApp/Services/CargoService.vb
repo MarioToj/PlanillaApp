@@ -14,4 +14,8 @@
         End If
         repo.AddCargo(c)
     End Sub
+
+    Function ObtenerCargoPorId(id As Integer) As Cargo
+        Return repo.GetById(id)
+    End Function
 End Class

@@ -129,6 +129,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConnectionDb\ConnPlanillaDb.vb" />
+    <Compile Include="FrmAsignarCargoATrabajador.Designer.vb">
+      <DependentUpon>FrmAsignarCargoATrabajador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAsignarCargoATrabajador.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAsignarOtrosATrabajador.Designer.vb">
+      <DependentUpon>FrmAsignarOtrosATrabajador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAsignarOtrosATrabajador.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmBonos.Designer.vb">
       <DependentUpon>FrmBonos.vb</DependentUpon>
     </Compile>
@@ -148,6 +160,8 @@
     <Compile Include="Models\OtroTipo.vb" />
     <Compile Include="Models\Planilla.vb" />
     <Compile Include="Models\Trabajador.vb" />
+    <Compile Include="Models\TrabajadorConCargo.vb" />
+    <Compile Include="Models\TrabajadorOtros.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -166,15 +180,23 @@
     <Compile Include="Repositories\BonosRepository.vb" />
     <Compile Include="Repositories\CargoBonoRepository.vb" />
     <Compile Include="Repositories\CargoRepository.vb" />
+    <Compile Include="Repositories\TrabajadorOtrosRepository.vb" />
     <Compile Include="Repositories\TrabajadorRepository.vb" />
     <Compile Include="Services\BonosService.vb" />
     <Compile Include="Services\CargoBonoService.vb" />
     <Compile Include="Services\CargoService.vb" />
+    <Compile Include="Services\TrabajadoresOtrosService.vb" />
     <Compile Include="Services\TrabajadorService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AsignacionDeBonosACargos.resx">
       <DependentUpon>AsignacionDeBonosACargos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAsignarCargoATrabajador.resx">
+      <DependentUpon>FrmAsignarCargoATrabajador.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAsignarOtrosATrabajador.resx">
+      <DependentUpon>FrmAsignarOtrosATrabajador.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBonos.resx">
       <DependentUpon>FrmBonos.vb</DependentUpon>

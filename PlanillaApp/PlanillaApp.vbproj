@@ -155,6 +155,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\Bono.vb" />
+    <Compile Include="Models\BonoPorId.vb" />
     <Compile Include="Models\Cargo.vb" />
     <Compile Include="Models\CargoBono.vb" />
     <Compile Include="Models\OtroTipo.vb" />
@@ -180,6 +181,7 @@
     <Compile Include="Repositories\BonosRepository.vb" />
     <Compile Include="Repositories\CargoBonoRepository.vb" />
     <Compile Include="Repositories\CargoRepository.vb" />
+    <Compile Include="Repositories\PlanillaRepository.vb" />
     <Compile Include="Repositories\TrabajadorOtrosRepository.vb" />
     <Compile Include="Repositories\TrabajadorRepository.vb" />
     <Compile Include="Services\BonosService.vb" />

@@ -23,4 +23,22 @@ Public Class TrabajadorOtrosRepository
         End Using
         Return Lista
     End Function
+
+    Public Sub GuardarOtros(trabajadorOtros As TrabajadorOtros)
+        Dim query As String = "
+            Insert into trabajador_otros (IDTrabajador, IDOtroTipo, Monto) 
+            values (@IDTrabajador, @IDOtroTipo, @Monto)
+            on duplicate key update Monto = @Monto;"
+
+        Using conn = dbConnect.GetConnection()
+            conn.Open()
+            Using cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@IDTrabajador", trabajadorOtros.IDTrabajador)
+                cmd.Parameters.AddWithValue("@IDOtroTipo", trabajadorOtros.IDOtroTipo)
+                cmd.Parameters.AddWithValue("@Monto", trabajadorOtros.Monto)
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+
+    End Sub
 End Class

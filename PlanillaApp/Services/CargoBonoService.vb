@@ -7,4 +7,11 @@
         End If
         cargoBonoRepo.Asignar(cB)
     End Sub
+
+    Public Function ObtenerBonosPorCargo(idCargo As Integer) As List(Of BonoPorId)
+        If idCargo = 0 Then
+            Throw New Exception("Seleccione un cargo")
+        End If
+        Return cargoBonoRepo.ObtenerBonosPorCargo(idCargo)
+    End Function
 End Class

@@ -26,6 +26,7 @@ Partial Class FrmAsignarCargoATrabajador
         Me.CbCargos = New System.Windows.Forms.ComboBox()
         Me.BtnAsignarCargo = New System.Windows.Forms.Button()
         Me.BtnOtrosTipos = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TxtNombreTrabajador
@@ -61,11 +62,22 @@ Partial Class FrmAsignarCargoATrabajador
         Me.BtnOtrosTipos.Text = "Asignación de Otros tipos de bonos"
         Me.BtnOtrosTipos.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(275, 98)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(231, 20)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Asignar Cargo A Trabajador"
+        '
         'FrmAsignarCargoATrabajador
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtnOtrosTipos)
         Me.Controls.Add(Me.BtnAsignarCargo)
         Me.Controls.Add(Me.CbCargos)
@@ -81,4 +93,5 @@ Partial Class FrmAsignarCargoATrabajador
     Friend WithEvents CbCargos As ComboBox
     Friend WithEvents BtnAsignarCargo As Button
     Friend WithEvents BtnOtrosTipos As Button
+    Friend WithEvents Label1 As Label
 End Class

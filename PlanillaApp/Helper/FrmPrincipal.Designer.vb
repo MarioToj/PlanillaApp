@@ -55,13 +55,13 @@ Partial Class FrmPrincipal
         'MenuCargos
         '
         Me.MenuCargos.Name = "MenuCargos"
-        Me.MenuCargos.Size = New System.Drawing.Size(180, 22)
+        Me.MenuCargos.Size = New System.Drawing.Size(145, 22)
         Me.MenuCargos.Text = "Menú Cargos"
         '
         'MenuBonos
         '
         Me.MenuBonos.Name = "MenuBonos"
-        Me.MenuBonos.Size = New System.Drawing.Size(180, 22)
+        Me.MenuBonos.Size = New System.Drawing.Size(145, 22)
         Me.MenuBonos.Text = "Menú Bonos"
         '
         'MenuAsignarBonos
@@ -75,12 +75,12 @@ Partial Class FrmPrincipal
         '
         Me.MenuCargoBonos.Name = "MenuCargoBonos"
         Me.MenuCargoBonos.Size = New System.Drawing.Size(214, 22)
-        Me.MenuCargoBonos.Text = " Cargo - Bono "
+        Me.MenuCargoBonos.Text = "Asignar Bonos a Cargo"
         '
         'MenuTrabajadores
         '
         Me.MenuTrabajadores.Name = "MenuTrabajadores"
-        Me.MenuTrabajadores.Size = New System.Drawing.Size(180, 22)
+        Me.MenuTrabajadores.Size = New System.Drawing.Size(214, 22)
         Me.MenuTrabajadores.Text = "Trabajadores"
         '
         'MenuAsignarOtros

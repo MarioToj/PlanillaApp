@@ -7,12 +7,14 @@
     Private totalBonos As Decimal
     Private totalOtros As Decimal
     Private sueldoActual As Decimal
+    Private totalDeducciones As Decimal
     Private monto As Decimal
 
     Private ReadOnly trabajadorService As New TrabajadorService()
     Private ReadOnly cargoService As New CargoService()
     Private ReadOnly cargoBonoService As New CargoBonoService()
     Private ReadOnly trabajadorOtrosService As New TrabajadoresOtrosService()
+    Private ReadOnly planillaService As New PlanillaService()
 
     Private Sub FrmAsignarOtrosATrabajador_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CbTrabajadores.DataSource = trabajadorService.TrabajadoresConCargos()
@@ -85,65 +87,64 @@
         LblFijo.Text = fijo.ToString("N2")
         LblPorcentajeSueldo.Text = porcentajeSueldo.ToString("N2")
 
-        totalOtros = porHora + porDia + fijo + porcentajeSueldo
+        totalOtros = porHora + porDia
+        totalDeducciones = fijo + porcentajeSueldo
         LblTotal.Text = totalOtros.ToString("N2")
+        LblDeducciones.Text = totalDeducciones.ToString("N2")
     End Sub
 
     Private Sub BtnCalcularTotal_Click(sender As Object, e As EventArgs) Handles BtnCalcularTotal.Click
 
-        If CbTrabajadores.SelectedValue Is Nothing OrElse Not IsNumeric(CbTrabajadores.SelectedValue) Then Exit Sub
-        Dim idTrabajador As Integer = CInt(CbTrabajadores.SelectedValue)
-        ' guardar otros en la base de dats *
-        If ChkPorHora.Checked Then
-            Dim otro = New TrabajadorOtros With {
-            .IDTrabajador = idTrabajador,
-            .IDOtroTipo = 2,
-            .Monto = porHora
-        }
-            trabajadorOtrosService.Guardar(otro)
-        End If
 
-        If ChkPorDia.Checked Then
-            Dim otro = New TrabajadorOtros With {
-            .IDTrabajador = idTrabajador,
-            .IDOtroTipo = 3,
-            .Monto = porDia
-        }
-            trabajadorOtrosService.Guardar(otro)
-        End If
-
-        If ChkFijo.Checked Then
-            Dim otro = New TrabajadorOtros With {
-            .IDTrabajador = idTrabajador,
-            .IDOtroTipo = 4,
-            .Monto = fijo
-        }
-            trabajadorOtrosService.Guardar(otro)
-        End If
-
-        If ChkPorcentajeSueldo.Checked Then
-            Dim otro = New TrabajadorOtros With {
-            .IDTrabajador = idTrabajador,
-            .IDOtroTipo = 5,
-            .Monto = porcentajeSueldo
-        }
-            trabajadorOtrosService.Guardar(otro)
-        End If
-
-        For Each item As BonoPorId In ClbCargoBonos.CheckedItems
-            Dim otro = New TrabajadorOtros With {
-            .IDTrabajador = idTrabajador,
-            .IDOtroTipo = item.IDBono,
-            .Monto = item.Monto
-        }
-            trabajadorOtrosService.Guardar(otro)
-        Next
-        '*
-
-        Dim deducciones = totalOtros + totalBonos
-
-        monto = sueldoActual + deducciones
+        monto = sueldoActual + totalBonos + totalOtros - totalDeducciones
         LblMonto.Text = "Q." & monto.ToString("N2")
+    End Sub
+    Private Sub BtnGenerarPlanilla_Click(sender As Object, e As EventArgs) Handles BtnGenerarPlanilla.Click
+        If CbTrabajadores.SelectedValue Is Nothing OrElse
+       Not IsNumeric(CbTrabajadores.SelectedValue) Then Exit Sub
+
+        Dim idTrabajador As Integer = CInt(CbTrabajadores.SelectedValue)
+
+        Try
+            ' guardar otros_tipos — solo los que aplican
+            If ChkPorHora.Checked Then
+                trabajadorOtrosService.Guardar(New TrabajadorOtros With {
+                .IDTrabajador = idTrabajador, .IDOtroTipo = 1, .Monto = porHora})
+            End If
+
+            If ChkPorDia.Checked Then
+                trabajadorOtrosService.Guardar(New TrabajadorOtros With {
+                .IDTrabajador = idTrabajador, .IDOtroTipo = 2, .Monto = porDia})
+            End If
+
+            If ChkFijo.Checked Then
+                trabajadorOtrosService.Guardar(New TrabajadorOtros With {
+                .IDTrabajador = idTrabajador, .IDOtroTipo = 3, .Monto = fijo})
+            End If
+
+            If ChkPorcentajeSueldo.Checked Then
+                trabajadorOtrosService.Guardar(New TrabajadorOtros With {
+                .IDTrabajador = idTrabajador, .IDOtroTipo = 4, .Monto = porcentajeSueldo})
+            End If
+
+            ' guardar planilla
+            Dim planilla As New Planilla With {
+            .IDTrabajador = idTrabajador,
+            .SueldoBase = sueldoActual,
+            .TotalBonos = totalBonos,
+            .TotalIngresos = totalOtros,
+            .TotalDeducciones = totalDeducciones,
+            .SueldoNeto = monto,
+            .FechaPago = Date.Today
+        }
+
+            planillaService.GuardarPlanilla(planilla)
+            MessageBox.Show("Planilla guardada correctamente.", "Listo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub ChkPorHora_CheckedChanged(sender As Object, e As EventArgs) Handles ChkPorHora.CheckedChanged

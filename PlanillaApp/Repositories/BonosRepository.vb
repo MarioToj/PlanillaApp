@@ -18,4 +18,20 @@
         End Using
         Return Lista
     End Function
+
+    Public Sub AddBono(bono As Bono)
+        Dim query As String = "
+        INSERT INTO bonos (NombreBono, Monto) 
+        VALUES (@NombreBono, @Monto);"
+
+        Using conn = dbCoonect.GetConnection()
+            conn.Open()
+            Using cmd As New MySql.Data.MySqlClient.MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@NombreBono", bono.NombreBono)
+                cmd.Parameters.AddWithValue("@Monto", bono.Monto)
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+    End Sub
+
 End Class

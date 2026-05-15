@@ -47,6 +47,9 @@ Partial Class FrmAsignarOtrosATrabajador
         Me.LblSueldo = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.BtnGenerarPlanilla = New System.Windows.Forms.Button()
+        Me.LblTitleDeducciones = New System.Windows.Forms.Label()
+        Me.LblDeducciones = New System.Windows.Forms.Label()
         CType(Me.NuDHoras, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NuDias, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -90,7 +93,7 @@ Partial Class FrmAsignarOtrosATrabajador
         'NuDHoras
         '
         Me.NuDHoras.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.NuDHoras.Location = New System.Drawing.Point(407, 198)
+        Me.NuDHoras.Location = New System.Drawing.Point(472, 198)
         Me.NuDHoras.Name = "NuDHoras"
         Me.NuDHoras.Size = New System.Drawing.Size(60, 20)
         Me.NuDHoras.TabIndex = 6
@@ -99,7 +102,7 @@ Partial Class FrmAsignarOtrosATrabajador
         '
         Me.LblHorasDias.AutoSize = True
         Me.LblHorasDias.BackColor = System.Drawing.SystemColors.Highlight
-        Me.LblHorasDias.Location = New System.Drawing.Point(473, 200)
+        Me.LblHorasDias.Location = New System.Drawing.Point(538, 200)
         Me.LblHorasDias.Name = "LblHorasDias"
         Me.LblHorasDias.Size = New System.Drawing.Size(35, 13)
         Me.LblHorasDias.TabIndex = 7
@@ -148,7 +151,8 @@ Partial Class FrmAsignarOtrosATrabajador
         'LblTotal
         '
         Me.LblTotal.AutoSize = True
-        Me.LblTotal.Location = New System.Drawing.Point(369, 286)
+        Me.LblTotal.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.LblTotal.Location = New System.Drawing.Point(387, 286)
         Me.LblTotal.Name = "LblTotal"
         Me.LblTotal.Size = New System.Drawing.Size(31, 13)
         Me.LblTotal.TabIndex = 12
@@ -198,7 +202,7 @@ Partial Class FrmAsignarOtrosATrabajador
         '
         Me.LblDias.AutoSize = True
         Me.LblDias.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.LblDias.Location = New System.Drawing.Point(473, 223)
+        Me.LblDias.Location = New System.Drawing.Point(538, 223)
         Me.LblDias.Name = "LblDias"
         Me.LblDias.Size = New System.Drawing.Size(28, 13)
         Me.LblDias.TabIndex = 18
@@ -207,7 +211,7 @@ Partial Class FrmAsignarOtrosATrabajador
         'NuDias
         '
         Me.NuDias.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.NuDias.Location = New System.Drawing.Point(407, 221)
+        Me.NuDias.Location = New System.Drawing.Point(472, 221)
         Me.NuDias.Name = "NuDias"
         Me.NuDias.Size = New System.Drawing.Size(60, 20)
         Me.NuDias.TabIndex = 17
@@ -277,9 +281,9 @@ Partial Class FrmAsignarOtrosATrabajador
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(227, 283)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(136, 16)
+        Me.Label1.Size = New System.Drawing.Size(132, 16)
         Me.Label1.TabIndex = 25
-        Me.Label1.Text = "Total deducciones"
+        Me.Label1.Text = "Total Otros Bonos"
         '
         'Label2
         '
@@ -292,11 +296,43 @@ Partial Class FrmAsignarOtrosATrabajador
         Me.Label2.TabIndex = 26
         Me.Label2.Text = "Sueldo Base"
         '
+        'BtnGenerarPlanilla
+        '
+        Me.BtnGenerarPlanilla.Location = New System.Drawing.Point(587, 322)
+        Me.BtnGenerarPlanilla.Name = "BtnGenerarPlanilla"
+        Me.BtnGenerarPlanilla.Size = New System.Drawing.Size(164, 76)
+        Me.BtnGenerarPlanilla.TabIndex = 27
+        Me.BtnGenerarPlanilla.Text = "Generar Cheque"
+        Me.BtnGenerarPlanilla.UseVisualStyleBackColor = True
+        '
+        'LblTitleDeducciones
+        '
+        Me.LblTitleDeducciones.AutoSize = True
+        Me.LblTitleDeducciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblTitleDeducciones.Location = New System.Drawing.Point(227, 299)
+        Me.LblTitleDeducciones.Name = "LblTitleDeducciones"
+        Me.LblTitleDeducciones.Size = New System.Drawing.Size(138, 16)
+        Me.LblTitleDeducciones.TabIndex = 29
+        Me.LblTitleDeducciones.Text = "Total Deducciones"
+        '
+        'LblDeducciones
+        '
+        Me.LblDeducciones.AutoSize = True
+        Me.LblDeducciones.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.LblDeducciones.Location = New System.Drawing.Point(387, 302)
+        Me.LblDeducciones.Name = "LblDeducciones"
+        Me.LblDeducciones.Size = New System.Drawing.Size(31, 13)
+        Me.LblDeducciones.TabIndex = 28
+        Me.LblDeducciones.Text = "Total"
+        '
         'FrmAsignarOtrosATrabajador
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.LblTitleDeducciones)
+        Me.Controls.Add(Me.LblDeducciones)
+        Me.Controls.Add(Me.BtnGenerarPlanilla)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.LblSueldo)
@@ -356,4 +392,7 @@ Partial Class FrmAsignarOtrosATrabajador
     Friend WithEvents LblSueldo As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents BtnGenerarPlanilla As Button
+    Friend WithEvents LblTitleDeducciones As Label
+    Friend WithEvents LblDeducciones As Label
 End Class

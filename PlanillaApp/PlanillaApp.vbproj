@@ -187,6 +187,7 @@
     <Compile Include="Services\BonosService.vb" />
     <Compile Include="Services\CargoBonoService.vb" />
     <Compile Include="Services\CargoService.vb" />
+    <Compile Include="Services\PlanillaService.vb" />
     <Compile Include="Services\TrabajadoresOtrosService.vb" />
     <Compile Include="Services\TrabajadorService.vb" />
   </ItemGroup>

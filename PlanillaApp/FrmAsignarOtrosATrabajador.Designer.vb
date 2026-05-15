@@ -50,6 +50,12 @@ Partial Class FrmAsignarOtrosATrabajador
         Me.BtnGenerarPlanilla = New System.Windows.Forms.Button()
         Me.LblTitleDeducciones = New System.Windows.Forms.Label()
         Me.LblDeducciones = New System.Windows.Forms.Label()
+        Me.PdPlanilla = New System.Drawing.Printing.PrintDocument()
+        Me.BtnImprimirPlanilla = New System.Windows.Forms.Button()
+        Me.PdCheque = New System.Drawing.Printing.PrintDocument()
+        Me.BtnImprimirCheque = New System.Windows.Forms.Button()
+        Me.LblTitleMontoLetras = New System.Windows.Forms.Label()
+        Me.BtnListPlanitllas = New System.Windows.Forms.Button()
         CType(Me.NuDHoras, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NuDias, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -84,7 +90,7 @@ Partial Class FrmAsignarOtrosATrabajador
         '
         Me.LblMonto.AutoSize = True
         Me.LblMonto.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.LblMonto.Location = New System.Drawing.Point(377, 364)
+        Me.LblMonto.Location = New System.Drawing.Point(340, 363)
         Me.LblMonto.Name = "LblMonto"
         Me.LblMonto.Size = New System.Drawing.Size(37, 13)
         Me.LblMonto.TabIndex = 5
@@ -221,7 +227,7 @@ Partial Class FrmAsignarOtrosATrabajador
         Me.LblTitleMonto.AutoSize = True
         Me.LblTitleMonto.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.LblTitleMonto.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblTitleMonto.Location = New System.Drawing.Point(229, 360)
+        Me.LblTitleMonto.Location = New System.Drawing.Point(215, 360)
         Me.LblTitleMonto.Name = "LblTitleMonto"
         Me.LblTitleMonto.Size = New System.Drawing.Size(119, 18)
         Me.LblTitleMonto.TabIndex = 19
@@ -258,9 +264,9 @@ Partial Class FrmAsignarOtrosATrabajador
         'BtnCalcularTotal
         '
         Me.BtnCalcularTotal.BackColor = System.Drawing.Color.Lime
-        Me.BtnCalcularTotal.Location = New System.Drawing.Point(295, 333)
+        Me.BtnCalcularTotal.Location = New System.Drawing.Point(267, 320)
         Me.BtnCalcularTotal.Name = "BtnCalcularTotal"
-        Me.BtnCalcularTotal.Size = New System.Drawing.Size(105, 24)
+        Me.BtnCalcularTotal.Size = New System.Drawing.Size(110, 33)
         Me.BtnCalcularTotal.TabIndex = 23
         Me.BtnCalcularTotal.Text = "CalcularTotal"
         Me.BtnCalcularTotal.UseVisualStyleBackColor = False
@@ -290,7 +296,7 @@ Partial Class FrmAsignarOtrosATrabajador
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Green
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(18, 260)
+        Me.Label2.Location = New System.Drawing.Point(12, 259)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(85, 16)
         Me.Label2.TabIndex = 26
@@ -298,12 +304,13 @@ Partial Class FrmAsignarOtrosATrabajador
         '
         'BtnGenerarPlanilla
         '
-        Me.BtnGenerarPlanilla.Location = New System.Drawing.Point(587, 322)
+        Me.BtnGenerarPlanilla.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.BtnGenerarPlanilla.Location = New System.Drawing.Point(253, 389)
         Me.BtnGenerarPlanilla.Name = "BtnGenerarPlanilla"
-        Me.BtnGenerarPlanilla.Size = New System.Drawing.Size(164, 76)
+        Me.BtnGenerarPlanilla.Size = New System.Drawing.Size(147, 35)
         Me.BtnGenerarPlanilla.TabIndex = 27
-        Me.BtnGenerarPlanilla.Text = "Generar Cheque"
-        Me.BtnGenerarPlanilla.UseVisualStyleBackColor = True
+        Me.BtnGenerarPlanilla.Text = "Generar Planilla"
+        Me.BtnGenerarPlanilla.UseVisualStyleBackColor = False
         '
         'LblTitleDeducciones
         '
@@ -325,11 +332,58 @@ Partial Class FrmAsignarOtrosATrabajador
         Me.LblDeducciones.TabIndex = 28
         Me.LblDeducciones.Text = "Total"
         '
+        'PdPlanilla
+        '
+        '
+        'BtnImprimirPlanilla
+        '
+        Me.BtnImprimirPlanilla.Location = New System.Drawing.Point(579, 414)
+        Me.BtnImprimirPlanilla.Name = "BtnImprimirPlanilla"
+        Me.BtnImprimirPlanilla.Size = New System.Drawing.Size(101, 27)
+        Me.BtnImprimirPlanilla.TabIndex = 30
+        Me.BtnImprimirPlanilla.Text = "Imprimir Planilla"
+        Me.BtnImprimirPlanilla.UseVisualStyleBackColor = True
+        '
+        'PdCheque
+        '
+        '
+        'BtnImprimirCheque
+        '
+        Me.BtnImprimirCheque.Location = New System.Drawing.Point(686, 417)
+        Me.BtnImprimirCheque.Name = "BtnImprimirCheque"
+        Me.BtnImprimirCheque.Size = New System.Drawing.Size(102, 21)
+        Me.BtnImprimirCheque.TabIndex = 31
+        Me.BtnImprimirCheque.Text = "Imprimir Cheque"
+        Me.BtnImprimirCheque.UseVisualStyleBackColor = True
+        '
+        'LblTitleMontoLetras
+        '
+        Me.LblTitleMontoLetras.AutoSize = True
+        Me.LblTitleMontoLetras.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.LblTitleMontoLetras.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblTitleMontoLetras.Location = New System.Drawing.Point(478, 337)
+        Me.LblTitleMontoLetras.Name = "LblTitleMontoLetras"
+        Me.LblTitleMontoLetras.Size = New System.Drawing.Size(0, 16)
+        Me.LblTitleMontoLetras.TabIndex = 33
+        '
+        'BtnListPlanitllas
+        '
+        Me.BtnListPlanitllas.Location = New System.Drawing.Point(713, 12)
+        Me.BtnListPlanitllas.Name = "BtnListPlanitllas"
+        Me.BtnListPlanitllas.Size = New System.Drawing.Size(75, 23)
+        Me.BtnListPlanitllas.TabIndex = 34
+        Me.BtnListPlanitllas.Text = "Listado de Planillas"
+        Me.BtnListPlanitllas.UseVisualStyleBackColor = True
+        '
         'FrmAsignarOtrosATrabajador
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.BtnListPlanitllas)
+        Me.Controls.Add(Me.LblTitleMontoLetras)
+        Me.Controls.Add(Me.BtnImprimirCheque)
+        Me.Controls.Add(Me.BtnImprimirPlanilla)
         Me.Controls.Add(Me.LblTitleDeducciones)
         Me.Controls.Add(Me.LblDeducciones)
         Me.Controls.Add(Me.BtnGenerarPlanilla)
@@ -395,4 +449,10 @@ Partial Class FrmAsignarOtrosATrabajador
     Friend WithEvents BtnGenerarPlanilla As Button
     Friend WithEvents LblTitleDeducciones As Label
     Friend WithEvents LblDeducciones As Label
+    Friend WithEvents PdPlanilla As Printing.PrintDocument
+    Friend WithEvents BtnImprimirPlanilla As Button
+    Friend WithEvents PdCheque As Printing.PrintDocument
+    Friend WithEvents BtnImprimirCheque As Button
+    Friend WithEvents LblTitleMontoLetras As Label
+    Friend WithEvents BtnListPlanitllas As Button
 End Class

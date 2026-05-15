@@ -2,6 +2,7 @@
 
     Private ReadOnly bonoService As New BonosService()
     Private Sub FrmBonos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DgvBonos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         CargarBonos()
     End Sub
 

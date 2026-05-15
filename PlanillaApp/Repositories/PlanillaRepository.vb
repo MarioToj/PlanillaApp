@@ -28,4 +28,52 @@ Public Class PlanillaRepository
             cmd.ExecuteNonQuery()
         End Using
     End Sub
+
+    Public Function ObtenerTodasPlanillas() As List(Of Planilla)
+        Dim planillas As New List(Of Planilla)()
+        Using conn = dbPlanilla.GetConnection()
+            conn.Open()
+            Dim sql = "SELECT * FROM nomina"
+            Dim cmd As New MySqlCommand(sql, conn)
+            Using reader = cmd.ExecuteReader()
+                While reader.Read()
+                    planillas.Add(New Planilla With {
+                        .IDPlanilla = reader.GetInt32("IDNomina"),
+                        .IDTrabajador = reader.GetInt32("IDTrabajador"),
+                        .SueldoBase = reader.GetDecimal("SueldoBase"),
+                        .TotalBonos = reader.GetDecimal("TotalBonos"),
+                        .TotalIngresos = reader.GetDecimal("TotalIngresos"),
+                        .TotalDeducciones = reader.GetDecimal("TotalDeducciones"),
+                        .SueldoNeto = reader.GetDecimal("SueldoNeto"),
+                        .FechaPago = reader.GetDateTime("FechaPago")
+                    })
+                End While
+            End Using
+        End Using
+        Return planillas
+    End Function
+
+    Public Function ObtenerPlanillaPorId(id As Integer) As Planilla
+        Using conn = dbPlanilla.GetConnection()
+            conn.Open()
+            Dim sql = "SELECT * FROM nomina WHERE IDNomina = @id"
+            Dim cmd As New MySqlCommand(sql, conn)
+            cmd.Parameters.AddWithValue("@id", id)
+            Using reader = cmd.ExecuteReader()
+                If reader.Read() Then
+                    Return New Planilla With {
+                        .IDPlanilla = reader.GetInt32("IDNomina"),
+                        .IDTrabajador = reader.GetInt32("IDTrabajador"),
+                        .SueldoBase = reader.GetDecimal("SueldoBase"),
+                        .TotalBonos = reader.GetDecimal("TotalBonos"),
+                        .TotalIngresos = reader.GetDecimal("TotalIngresos"),
+                        .TotalDeducciones = reader.GetDecimal("TotalDeducciones"),
+                        .SueldoNeto = reader.GetDecimal("SueldoNeto"),
+                        .FechaPago = reader.GetDateTime("FechaPago")
+                    }
+                End If
+            End Using
+        End Using
+        Return Nothing
+    End Function
 End Class

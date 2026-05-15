@@ -154,6 +154,19 @@
       <DependentUpon>FrmCargos.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Helper\FrmPlanillasList.Designer.vb">
+      <DependentUpon>FrmPlanillasList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\FrmPlanillasList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helper\FrmPrincipal.Designer.vb">
+      <DependentUpon>FrmPrincipal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\FrmPrincipal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helper\NumeroALetras.vb" />
     <Compile Include="Models\Bono.vb" />
     <Compile Include="Models\BonoPorId.vb" />
     <Compile Include="Models\Cargo.vb" />
@@ -167,6 +180,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -206,6 +220,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCargos.resx">
       <DependentUpon>FrmCargos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helper\FrmPlanillasList.resx">
+      <DependentUpon>FrmPlanillasList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helper\FrmPrincipal.resx">
+      <DependentUpon>FrmPrincipal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

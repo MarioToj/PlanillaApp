@@ -1,14 +1,15 @@
 ﻿Public Class FrmAsignarOtrosATrabajador
 
-    Private porHora As Decimal
-    Private porDia As Decimal
-    Private fijo As Double
-    Private porcentajeSueldo As Decimal
-    Private totalBonos As Decimal
-    Private totalOtros As Decimal
-    Private sueldoActual As Decimal
-    Private totalDeducciones As Decimal
-    Private monto As Decimal
+    Public porHora As Decimal
+    Public porDia As Decimal
+    Public fijo As Double
+    Public porcentajeSueldo As Decimal
+    Public totalBonos As Decimal
+    Public totalOtros As Decimal
+    Public sueldoActual As Decimal
+    Public totalDeducciones As Decimal
+    Public monto As Decimal
+    Public montoEnLetras As String
 
     Private ReadOnly trabajadorService As New TrabajadorService()
     Private ReadOnly cargoService As New CargoService()
@@ -106,7 +107,6 @@
         Dim idTrabajador As Integer = CInt(CbTrabajadores.SelectedValue)
 
         Try
-            ' guardar otros_tipos — solo los que aplican
             If ChkPorHora.Checked Then
                 trabajadorOtrosService.Guardar(New TrabajadorOtros With {
                 .IDTrabajador = idTrabajador, .IDOtroTipo = 1, .Monto = porHora})
@@ -127,7 +127,6 @@
                 .IDTrabajador = idTrabajador, .IDOtroTipo = 4, .Monto = porcentajeSueldo})
             End If
 
-            ' guardar planilla
             Dim planilla As New Planilla With {
             .IDTrabajador = idTrabajador,
             .SueldoBase = sueldoActual,
@@ -146,6 +145,9 @@
                         MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
+
 
     Private Sub ChkPorHora_CheckedChanged(sender As Object, e As EventArgs) Handles ChkPorHora.CheckedChanged
         ActualizarOtros()
@@ -180,4 +182,148 @@
         CargarCargosBono()
     End Sub
 
+    Private Sub BtnImprimirPlanilla_Click(sender As Object, e As EventArgs) Handles BtnImprimirPlanilla.Click
+        If monto = 0 Then
+            MessageBox.Show("Primero calcula la planilla.", "Aviso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        PdPlanilla.Print()
+    End Sub
+
+    Private Sub BtnImprimirCheque_Click(sender As Object, e As EventArgs) Handles BtnImprimirCheque.Click
+        If monto = 0 Then
+            MessageBox.Show("Primero calcula la planilla.", "Aviso",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        PdCheque.Print()
+    End Sub
+
+    Private Sub PdPlanilla_PrintPage(sender As Object,
+            e As Printing.PrintPageEventArgs) Handles PdPlanilla.PrintPage
+
+        Dim g = e.Graphics
+        Dim fT = New Font("Arial", 13, FontStyle.Bold)
+        Dim fS = New Font("Arial", 10, FontStyle.Bold)
+        Dim fN = New Font("Arial", 9)
+        Dim fL = New Font("Arial", 11, FontStyle.Bold)
+        Dim negro = Brushes.Black
+        Dim gris = Brushes.Gray
+        Dim verde = Brushes.DarkGreen
+        Dim rojo = Brushes.DarkRed
+        Dim izq = 30
+        Dim der = 780
+        Dim col = 600
+        Dim y = 30
+
+        Dim nombreTrabajador = CbTrabajadores.Text
+        Dim idTrabajador = CInt(CbTrabajadores.SelectedValue)
+        Dim trabajador = trabajadorService.ObtenerTrabajadorPorId(idTrabajador)
+        Dim cargo = cargoService.ObtenerCargoPorId(trabajador.IDCargo)
+
+        g.DrawString("PLANILLA DE SUELDOS", fT, negro, 170, y) : y += 22
+        g.DrawString($"Fecha: {Date.Today:dd/MM/yyyy}", fN, gris, izq, y) : y += 18
+        g.DrawLine(Pens.Black, izq, y, der, y) : y += 12
+
+        g.DrawString("EMPLEADO", fS, negro, izq, y) : y += 18
+        g.DrawString($"Nombre : {nombreTrabajador}", fN, negro, izq, y) : y += 16
+        g.DrawString($"Cargo  : {cargo.NombreCargo}", fN, negro, izq, y) : y += 16
+        g.DrawLine(Pens.LightGray, izq, y, der, y) : y += 12
+
+        g.DrawString("SUELDO BASE", fS, negro, izq, y)
+        g.DrawString($"Q {sueldoActual:N2}", fN, negro, col, y) : y += 20
+        g.DrawLine(Pens.LightGray, izq, y, der, y) : y += 12
+
+        g.DrawString("INGRESOS", fS, verde, izq, y) : y += 18
+
+        If totalBonos > 0 Then
+            g.DrawString("  Bonos de cargo", fN, negro, izq, y)
+            g.DrawString($"+ Q {totalBonos:N2}", fN, verde, col, y) : y += 16
+            For Each item As BonoPorId In ClbCargoBonos.CheckedItems
+                g.DrawString($"     · {item.NombreBono}", fN, gris, izq, y)
+                g.DrawString($"Q {item.Monto:N2}", fN, gris, 430, y) : y += 14
+            Next
+        End If
+
+        If totalOtros > 0 Then
+            g.DrawString("  Otros ingresos", fN, negro, izq, y)
+            g.DrawString($"+ Q {totalOtros:N2}", fN, verde, col, y) : y += 16
+            If ChkPorHora.Checked Then
+                g.DrawString($"     · Horas extra: ((sueldo/30)/8) * 1.5", fN, gris, izq, y)
+                g.DrawString($"Q {porHora:N2}", fN, gris, 430, y) : y += 14
+            End If
+            If ChkPorDia.Checked Then
+                g.DrawString($"     · Viáticos: Q.120.00/d ({NuDias.Value} días)", fN, gris, izq, y)
+                g.DrawString($"Q {porDia:N2}", fN, gris, 430, y) : y += 14
+            End If
+        End If
+
+        g.DrawLine(Pens.LightGray, izq, y, der, y) : y += 12
+
+        g.DrawString("DEDUCCIONES", fS, rojo, izq, y) : y += 18
+
+        If totalDeducciones > 0 Then
+            g.DrawString("  Total deducciones", fN, negro, izq, y)
+            g.DrawString($"- Q {totalDeducciones:N2}", fN, rojo, col, y) : y += 16
+            If ChkFijo.Checked Then
+                g.DrawString("     · Seguro médico", fN, gris, izq, y)
+                g.DrawString($"Q {fijo:N2}", fN, gris, 430, y) : y += 14
+            End If
+            If ChkPorcentajeSueldo.Checked Then
+                g.DrawString("     · Préstamo (10%)", fN, gris, izq, y)
+                g.DrawString($"Q {porcentajeSueldo:N2}", fN, gris, 430, y) : y += 14
+            End If
+        Else
+            g.DrawString("  Sin deducciones", fN, gris, izq, y) : y += 16
+        End If
+
+        g.DrawLine(Pens.Black, izq, y, der, y) : y += 12
+
+        g.DrawString("SUELDO LÍQUIDO", fL, negro, izq, y)
+        g.DrawString($"Q {monto:N2}", fL, negro, col - 20, y) : y += 30
+
+        g.DrawLine(Pens.Black, izq, y, der, y)
+
+        e.HasMorePages = False
+    End Sub
+
+    Private Sub PdCheque_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PdCheque.PrintPage
+        Dim g = e.Graphics
+        Dim fNormal = New Font("Courier New", 11)
+        Dim fMonto = New Font("Courier New", 13, FontStyle.Bold)
+
+        Dim negro = Brushes.Black
+
+        Dim xFecha = 150
+        Dim yFecha = 70
+
+        Dim xNombre = 150
+        Dim yNombre = 95
+
+        Dim xMontoNum = 600
+        Dim yMontoNum = 60
+
+        Dim xMontoLetras = 120
+        Dim yMontoLetras = 120
+
+        Dim nombreTrabajador = CbTrabajadores.Text
+        Dim montoLiquido = monto
+        Dim letras As String = NumeroALetras.Convertir(monto)
+
+        g.DrawString("Santa Cruz del Quiché, Quiché, " & Date.Today.ToString("dd/MM/yyyy"), fNormal, negro, xFecha, yFecha)
+
+        g.DrawString(nombreTrabajador, fNormal, negro, xNombre, yNombre)
+
+        g.DrawString("Q " & montoLiquido.ToString("N2"), fMonto, negro, xMontoNum, yMontoNum)
+
+        g.DrawString(letras, fNormal, negro, xMontoLetras, yMontoLetras)
+
+        e.HasMorePages = False
+    End Sub
+
+    Private Sub BtnListPlanitllas_Click(sender As Object, e As EventArgs) Handles BtnListPlanitllas.Click
+        Me.Hide()
+        FrmPlanillasList.Show()
+    End Sub
 End Class

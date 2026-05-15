@@ -3,6 +3,7 @@
     Private ReadOnly trabajadorService As New TrabajadorService
     Private ReadOnly cargoService As New CargoService()
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DgvCargos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         MostrarDatos()
     End Sub
 
